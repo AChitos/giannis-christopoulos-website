@@ -1244,8 +1244,8 @@ html {
     
     /* Improved spacing for mobile */
     .hero {
-        padding-top: 70px;
-        min-height: calc(100vh - 70px);
+        padding-top: 100px;
+        min-height: calc(100vh - 100px);
     }
     
     /* Better form inputs on mobile */
