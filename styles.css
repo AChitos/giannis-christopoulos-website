@@ -777,6 +777,11 @@ body {
         gap: 2rem;
         padding: 0 15px;
     }
+    
+    /* Hide hero image on mobile since bio image will be shown instead */
+    .hero-image {
+        display: none;
+    }
 
     .hero-title {
         font-size: 2.5rem;
@@ -836,11 +841,13 @@ body {
     .bio-text h3 {
         font-size: 1.8rem;
         text-align: center;
+        margin-bottom: 1rem;
     }
     
     .bio-text p {
         font-size: 1rem;
         text-align: center;
+        margin-bottom: 1.5rem;
     }
 
     .timeline-item {
@@ -871,11 +878,13 @@ body {
     .bio-image {
         position: static;
         order: -1;
+        margin-bottom: 2rem;
     }
     
     .bio-image-container {
         width: 250px;
         height: 250px;
+        margin: 0 auto;
     }
     
     .services {
@@ -1012,6 +1021,11 @@ body {
     .hero-container {
         padding: 0 10px;
         gap: 1.5rem;
+    }
+    
+    /* Hide hero image on small mobile as well */
+    .hero-image {
+        display: none;
     }
 
     .hero-title {
