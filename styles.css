@@ -72,6 +72,7 @@ body {
     transition: color 0.3s ease;
     position: relative;
     font-size: 0.95rem;
+    padding: 0.5rem 0;
 }
 
 .nav-link:hover {
@@ -97,6 +98,14 @@ body {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    z-index: 1001;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .bar {
@@ -169,6 +178,10 @@ body {
     cursor: pointer;
     display: inline-block;
     font-family: inherit;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-primary {
@@ -491,6 +504,11 @@ body {
     padding: 1.5rem;
     text-align: center;
     transition: all 0.3s ease;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-placeholder:hover {
@@ -552,6 +570,7 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     color: white;
+    flex-shrink: 0;
 }
 
 .contact-details h4 {
@@ -586,6 +605,7 @@ body {
     transition: border-color 0.3s ease;
     background: white;
     font-family: inherit;
+    min-height: 44px;
 }
 
 .form-group input:focus,
@@ -638,6 +658,8 @@ body {
     color: #86868b;
     text-decoration: none;
     transition: color 0.3s ease;
+    padding: 0.25rem 0;
+    display: inline-block;
 }
 
 .footer-section ul li a:hover {
@@ -675,7 +697,43 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-container {
+        gap: 3rem;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.8rem;
+    }
+    
+    .profile-image-container {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .bio-content {
+        gap: 3rem;
+    }
+    
+    .bio-image-container {
+        width: 280px;
+        height: 280px;
+    }
+}
+
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .nav-container {
+        padding: 0 15px;
+    }
+    
     .hamburger {
         display: flex;
     }
@@ -685,112 +743,457 @@ body {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         width: 100%;
         text-align: center;
         transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
         padding: 2rem 0;
+        gap: 1.5rem;
     }
 
     .nav-menu.active {
         left: 0;
+    }
+    
+    .nav-logo h2 {
+        font-size: 1.3rem;
+    }
+    
+    .nav-logo span {
+        font-size: 0.8rem;
+    }
+    
+    .nav-link {
+        padding: 1rem 0;
+        font-size: 1.1rem;
     }
 
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
+        padding: 0 15px;
     }
 
     .hero-title {
         font-size: 2.5rem;
+        line-height: 1.2;
     }
 
     .hero-subtitle {
         font-size: 1.5rem;
+        line-height: 1.3;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
     }
 
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        min-height: 48px;
     }
 
     .profile-image-container {
-        width: 300px;
-        height: 300px;
+        width: 280px;
+        height: 280px;
+    }
+    
+    .section-header {
+        margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+    
+    .section-header p {
+        font-size: 1.1rem;
     }
 
+    .bio {
+        padding: 4rem 0;
+    }
+    
     .bio-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .bio-text h3 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .bio-text p {
+        font-size: 1rem;
+        text-align: center;
     }
 
     .timeline-item {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 1.5rem;
+        text-align: center;
     }
 
     .timeline-item::before {
         display: none;
     }
+    
+    .timeline-year {
+        justify-content: center;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content h4 {
+        font-size: 1.2rem;
+    }
+    
+    .timeline-content p {
+        font-size: 0.95rem;
+    }
 
+    .bio-image {
+        position: static;
+        order: -1;
+    }
+    
     .bio-image-container {
         width: 250px;
         height: 250px;
     }
-
+    
+    .services {
+        padding: 4rem 0;
+    }
+    
     .services-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
-
+    
+    .service-card {
+        padding: 2rem;
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.4rem;
+    }
+    
+    .projects {
+        padding: 4rem 0;
+    }
+    
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
-
+    
+    .project-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .project-content {
+        padding: 1.5rem;
+    }
+    
+    .project-content h3 {
+        font-size: 1.4rem;
+    }
+    
+    .project-gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .gallery-placeholder {
+        padding: 1rem;
+        min-height: 80px;
+    }
+    
+    .gallery-placeholder i {
+        font-size: 1.5rem;
+    }
+    
+    .contact {
+        padding: 4rem 0;
+    }
+    
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-
-    .section-header h2 {
-        font-size: 2rem;
+    
+    .contact-info {
+        gap: 1.5rem;
+    }
+    
+    .contact-item {
+        padding: 1.2rem;
+        gap: 0.8rem;
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .contact-details h4 {
+        font-size: 1rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.9rem;
+    }
+    
+    .contact-form {
+        padding: 2rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+        min-height: 48px;
+    }
+    
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
     }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 15px;
+        padding: 0 10px;
+    }
+    
+    .nav-container {
+        padding: 0 10px;
+    }
+    
+    .nav-logo h2 {
+        font-size: 1.2rem;
+    }
+    
+    .nav-logo span {
+        font-size: 0.75rem;
+    }
+    
+    .hero-container {
+        padding: 0 10px;
+        gap: 1.5rem;
     }
 
     .hero-title {
         font-size: 2rem;
+        line-height: 1.2;
     }
 
     .hero-subtitle {
         font-size: 1.2rem;
+        line-height: 1.3;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.6;
     }
 
     .btn {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
-    }
-
-    .service-card {
-        padding: 1.5rem;
-    }
-
-    .contact-form {
-        padding: 1.5rem;
-    }
-
-    .project-gallery {
-        grid-template-columns: 1fr;
+        max-width: 250px;
+        min-height: 44px;
     }
 
     .profile-image-container {
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+    }
+    
+    .bio {
+        padding: 3rem 0;
+    }
+    
+    .bio-text h3 {
+        font-size: 1.6rem;
+    }
+    
+    .bio-text p {
+        font-size: 0.95rem;
+    }
+    
+    .timeline-item {
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .timeline-year {
+        font-size: 0.9rem;
+    }
+    
+    .timeline-content h4 {
+        font-size: 1.1rem;
+    }
+    
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
+    
+    .bio-image-container {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .services {
+        padding: 3rem 0;
+    }
+    
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .service-card p {
+        font-size: 0.95rem;
+    }
+    
+    .service-card li {
+        font-size: 0.9rem;
+        padding-left: 1.2rem;
+    }
+    
+    .projects {
+        padding: 3rem 0;
+    }
+    
+    .project-content {
+        padding: 1.2rem;
+    }
+    
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .project-content p {
+        font-size: 0.95rem;
+    }
+    
+    .gallery-placeholder {
+        padding: 0.8rem;
+        min-height: 60px;
+    }
+    
+    .gallery-placeholder i {
+        font-size: 1.3rem;
+    }
+    
+    .gallery-placeholder span {
+        font-size: 0.8rem;
+    }
+    
+    .contact {
+        padding: 3rem 0;
+    }
+    
+    .contact-item {
+        padding: 1rem;
+        gap: 0.6rem;
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .contact-details h4 {
+        font-size: 0.95rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.85rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
+    }
+    
+    .footer {
+        padding: 1.5rem 0 1rem;
+    }
+    
+    .footer-section h3,
+    .footer-section h4 {
+        font-size: 1.1rem;
+    }
+    
+    .footer-section p,
+    .footer-section ul li a {
+        font-size: 0.9rem;
     }
 }
 
@@ -822,4 +1225,46 @@ html {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    /* Better touch targets */
+    .btn, .nav-link, .service-card, .project-card, .contact-item {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Prevent text selection on interactive elements */
+    .btn, .nav-link, .hamburger {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* Improved spacing for mobile */
+    .hero {
+        padding-top: 70px;
+        min-height: calc(100vh - 70px);
+    }
+    
+    /* Better form inputs on mobile */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        -webkit-appearance: none;
+        border-radius: 10px;
+    }
+    
+    /* Prevent zoom on input focus (iOS) */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+    }
+    
+    /* Better scrolling performance */
+    .hero, .bio, .services, .projects, .contact {
+        -webkit-overflow-scrolling: touch;
+    }
 }

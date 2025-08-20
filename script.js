@@ -5,13 +5,30 @@ const navMenu = document.querySelector('.nav-menu');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (navMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
 });
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
+    document.body.style.overflow = '';
 }));
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -19,9 +36,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            // Close mobile menu if open
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Calculate offset for fixed navbar
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const targetPosition = target.offsetTop - navbarHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
     });
@@ -48,7 +74,9 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (window.scrollY >= (sectionTop - 200)) {
+        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+        
+        if (window.scrollY >= (sectionTop - navbarHeight - 200)) {
             current = section.getAttribute('id');
         }
     });
@@ -124,25 +152,45 @@ function showNotification(message, type = 'info') {
         max-width: 400px;
     `;
     
+    // Mobile responsive positioning
+    if (window.innerWidth <= 768) {
+        notification.style.right = '10px';
+        notification.style.left = '10px';
+        notification.style.maxWidth = 'none';
+        notification.style.transform = 'translateY(-100px)';
+    }
+    
     // Add to page
     document.body.appendChild(notification);
     
     // Animate in
     setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
+        if (window.innerWidth <= 768) {
+            notification.style.transform = 'translateY(0)';
+        } else {
+            notification.style.transform = 'translateX(0)';
+        }
     }, 100);
     
     // Close button functionality
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.addEventListener('click', () => {
-        notification.style.transform = 'translateX(400px)';
+        if (window.innerWidth <= 768) {
+            notification.style.transform = 'translateY(-100px)';
+        } else {
+            notification.style.transform = 'translateX(400px)';
+        }
         setTimeout(() => notification.remove(), 300);
     });
     
     // Auto remove after 5 seconds
     setTimeout(() => {
         if (notification.parentNode) {
-            notification.style.transform = 'translateX(400px)';
+            if (window.innerWidth <= 768) {
+                notification.style.transform = 'translateY(-100px)';
+            } else {
+                notification.style.transform = 'translateX(400px)';
+            }
             setTimeout(() => notification.remove(), 300);
         }
     }, 5000);
@@ -175,13 +223,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Parallax effect for hero section
+// Parallax effect for hero section (disabled on mobile for better performance)
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
+    if (window.innerWidth > 768) {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        }
     }
 });
 
@@ -256,7 +306,17 @@ backToTopBtn.style.cssText = `
     transition: all 0.3s ease;
     z-index: 1000;
     font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 `;
+
+// Mobile responsive back to top button
+if (window.innerWidth <= 768) {
+    backToTopBtn.style.bottom = '20px';
+    backToTopBtn.style.right = '20px';
+    backToTopBtn.style.width = '45px';
+    backToTopBtn.style.height = '45px';
+    backToTopBtn.style.fontSize = '1rem';
+}
 
 document.body.appendChild(backToTopBtn);
 
@@ -293,11 +353,15 @@ backToTopBtn.addEventListener('mouseleave', () => {
 // Initialize tooltips for service cards
 document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
+        if (window.innerWidth > 768) {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+        }
     });
     
     card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
+        if (window.innerWidth > 768) {
+            card.style.transform = 'translateY(0) scale(1)';
+        }
     });
 });
 
@@ -341,5 +405,67 @@ style.textContent = `
         animation: spin 1s linear infinite;
         z-index: 10000;
     }
+    
+    /* Mobile menu active state */
+    .hamburger.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Active navigation link */
+    .nav-link.active {
+        color: #0071e3;
+    }
+    
+    .nav-link.active::after {
+        width: 100%;
+    }
+    
+    /* Touch-friendly improvements */
+    @media (max-width: 768px) {
+        .btn, .nav-link, .service-card, .project-card, .contact-item {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .btn:active, .nav-link:active {
+            transform: scale(0.98);
+        }
+        
+        .service-card:active, .project-card:active {
+            transform: scale(0.98);
+        }
+    }
 `;
 document.head.appendChild(style);
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    // Close mobile menu on resize if screen becomes larger
+    if (window.innerWidth > 768) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Update back to top button position
+    if (window.innerWidth <= 768) {
+        backToTopBtn.style.bottom = '20px';
+        backToTopBtn.style.right = '20px';
+        backToTopBtn.style.width = '45px';
+        backToTopBtn.style.height = '45px';
+        backToTopBtn.style.fontSize = '1rem';
+    } else {
+        backToTopBtn.style.bottom = '30px';
+        backToTopBtn.style.right = '30px';
+        backToTopBtn.style.width = '50px';
+        backToTopBtn.style.height = '50px';
+        backToTopBtn.style.fontSize = '1.2rem';
+    }
+});
