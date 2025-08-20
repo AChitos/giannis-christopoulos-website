@@ -1,0 +1,20 @@
+{
+  "name": "giannis-christopoulos-website",
+  "version": "1.0.0",
+  "description": "Personal website for Giannis Christopoulos - Civil Engineer",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'Static site - no build required'"
+  },
+  "keywords": [
+    "civil-engineer",
+    "portfolio",
+    "static-site"
+  ],
+  "author": "Giannis Christopoulos",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
